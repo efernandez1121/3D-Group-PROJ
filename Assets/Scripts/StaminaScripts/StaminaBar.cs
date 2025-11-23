@@ -12,8 +12,6 @@ public class StaminaBar : MonoBehaviour
     //UI import
     public Image staminaBar;
 
-
-
     // Update is called once per frame
     void Update()
     {
