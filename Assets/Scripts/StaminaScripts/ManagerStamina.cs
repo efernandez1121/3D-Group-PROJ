@@ -3,16 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Needed bools for actions
-//- isRunning : whether the cat is running
-//- isPP : Whether the cat is pushing or pulling
-//- isHit: Whether the cat was hit by Thwump
-//- gotBadFish: Wether the player lost the minigame and got the bad fish
-
-//smallRestore: got small fish from minigame
-//bool bigRestore : got big fish from minigame
-
-
 // All the configurable, constant stamina values + functions to return restore and dmg amts
 [CreateAssetMenu(menuName = "Managers/StaminaManager")]
 public class ManagerStamina : ScriptableObject
