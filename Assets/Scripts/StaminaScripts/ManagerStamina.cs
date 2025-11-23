@@ -24,7 +24,7 @@ public class ManagerStamina : ScriptableObject
     public float bigFish = 15f;
 
     //Functions
-    //Checks the returns the correct drain amount based on the activity being performed
+    //Checks and returns the correct drain amount based on the activity being performed
     // note that as implemented the costs stack; ie running + pulling stacks costs
     public float getDrainAmt(bool isRunning, bool isPP, bool isHit, bool gotBadFish)
     {
