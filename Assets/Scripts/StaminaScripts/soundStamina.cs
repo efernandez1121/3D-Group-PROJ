@@ -4,7 +4,7 @@ using UnityEngine;
 
 //tester script just to help with testing stamina related function
 // remember to add asset > audio source to whatever the audio source is for this to work in addition to the code
-public class MovementSkeleton : MonoBehaviour
+public class staminaSound : MonoBehaviour
 {
     //references
     public ActionDetector action;
