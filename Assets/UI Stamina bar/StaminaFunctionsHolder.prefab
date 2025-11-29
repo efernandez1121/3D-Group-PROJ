@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 11400000, guid: ab744e91b31ff124d81b761b57ed55c4, type: 2}
-  action: {fileID: 0}
+  action: {fileID: 5897250121537927139, guid: 21b8e7293b43f28478373a12553f0867, type: 3}
   currStamina: 0
