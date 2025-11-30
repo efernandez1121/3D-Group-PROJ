@@ -20,4 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pause.unity
     guid: ee8a2090ab18d4b1ab07af6d0b294441
+    path: Assets/Scenes/MazeScene.unity
+    guid: e417d5e3fb95c6442b3cae4f7c0966b0
   m_configObjects: {}
