@@ -19,7 +19,7 @@ public class thwompMovement : MonoBehaviour
     [Header("settings")]
     [Header("Vertical positioning")]
     public float topHeight = 7f;
-    public float bottomHeight = 0f;
+    public float bottomHeight = 1f; // 0 made it go too deep into ground
 
     [Header("Horizontal-shaking range")]
     public float leftAndRightEdge = 0.35f;
@@ -87,7 +87,6 @@ public class thwompMovement : MonoBehaviour
     }
     private IEnumerator Shake() //fix logic to be like the up down logic
     {
-        Debug.Log("Shaking now rahh");
         shaking = true;
         float timeElapsed = 0f; //for keeping track of how long its been shaking
         Vector3 pos = transform.position;
@@ -145,7 +144,6 @@ public class thwompMovement : MonoBehaviour
 
         lastHitSound = Time.time;
         audioSource.PlayOneShot(hitAudio, volume);
-        detector.isHit=false; //reset flag
     }
 
 }
