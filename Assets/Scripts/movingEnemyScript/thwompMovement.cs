@@ -9,8 +9,7 @@ using static UnityEditor.PlayerSettings;
 public class thwompMovement : MonoBehaviour
 {
     //references
-    //public enemySettings settings;
-    //public ActionDetector detector;
+    public ActionDetector detector;
 
     //sound
     private AudioSource audioSource;
@@ -23,18 +22,19 @@ public class thwompMovement : MonoBehaviour
     public float bottomHeight = 0f;
 
     [Header("Horizontal-shaking range")]
-    public float leftAndRightEdge = 10f;
+    public float leftAndRightEdge = 0.35f;
 
     [Header("Speed and acceleration amountage")]
     public float speed = 10f;
     public float maxSpeed = 20f;
     public float acceleration = 10f;
-    public float shakeSpeed = 25f;
+    public float shakeSpeed = 9f;
 
     [Header("Delays")]
     //public float bottomDelay = 1.5f;
     public float delay = 3f;
     public float shakeTime = 2f;
+    public float soundDelay = 1f;
 
     [Header("Flags")]
     protected bool movingUp = false;
@@ -44,7 +44,7 @@ public class thwompMovement : MonoBehaviour
     [Header("Trackers")]
     public float currSpeed = 10f; //same as speed, but it'll be changed later
     public float xStart;
-    
+    public float lastHitSound = -999f; //set it so that it def won't trigger immediately
 
     private void Start()
     {
@@ -134,19 +134,18 @@ public class thwompMovement : MonoBehaviour
         yield return new WaitForSeconds(delay);
         wait = false;
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    Debug.Log("Hit the player (trigger)");
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        audioSource.PlayOneShot(hitAudio, volume);
-    //    }
-    //}
+    // also records decrease instamina
     public void PlayHitSound()
     {
-        Debug.Log("Hit the player");
+        Debug.Log("playing sound");
+        detector.isHit = true;
+        //block excessive playing of sound
+        if (Time.time - lastHitSound < soundDelay)
+            return;   
+
+        lastHitSound = Time.time;
         audioSource.PlayOneShot(hitAudio, volume);
+        detector.isHit=false; //reset flag
     }
 
 }
