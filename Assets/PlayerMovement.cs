@@ -83,6 +83,15 @@ public class PlayerMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        if (detector == null)
+        {
+            detector = FindObjectOfType<ActionDetector>();
+            if (detector == null)
+            {
+                Debug.LogError("No ActionDetector found in the scene!");
+            }
+        }
     }
 
     void Update()
@@ -92,7 +101,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 right = transform.TransformDirection(Vector3.right);
 
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        detector.isRunning = isRunning; //stamina running flag
 
         float baseSpeed = isRunning ? runSpeed : walkSpeed;
 
@@ -101,6 +109,10 @@ public class PlayerMovement : MonoBehaviour
 
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+
+        Vector3 horizontal = new Vector3(moveDirection.x, 0, moveDirection.z); // used to determine if the player is moving or not for stamina
+        bool isMoving = horizontal.sqrMagnitude > 0.001f; // tiny threshold
+        detector.isRunning = horizontal.sqrMagnitude > 0.001f;
 
         // --- High jump (charge on ground, release to jump) ---
         if (characterController.isGrounded)
