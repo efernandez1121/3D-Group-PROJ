@@ -11,6 +11,11 @@ public class SimplePlayerMovement : MonoBehaviour
     public float runSpeed = 12f;
     public float gravity = 20f;
 
+    [Header("Jump Settings")]
+    public float jumpPower = 6f;          // normal jump
+    public float maxJumpChargeTime = 1f;  // how long you can hold space
+    public float highJumpMultiplier = 2f; // how much stronger a fully charged jump is
+
     [Header("Look Settings")]
     public float lookSpeed = 2f;
     public float lookXLimit = 85f;
@@ -19,13 +24,17 @@ public class SimplePlayerMovement : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0f;
 
+    // High-jump state
+    private bool isChargingJump = false;
+    private float jumpChargeTimer = 0f;
+
     // Animator
     private Animator anim;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        anim = GetComponentInChildren<Animator>();  // Finds the cat model animator
+        anim = GetComponentInChildren<Animator>();
 
         if (playerCamera == null)
             playerCamera = Camera.main;
@@ -36,19 +45,19 @@ public class SimplePlayerMovement : MonoBehaviour
 
     void Update()
     {
-        HandleMovement();
+        HandleMovementAndJump();
         HandleLook();
     }
 
     // --------------------------
-    // MOVEMENT
+    // MOVEMENT + HIGH JUMP
     // --------------------------
-    void HandleMovement()
+    void HandleMovementAndJump()
     {
+        // Basic movement
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
-        // Inputs
         float inputV = Input.GetAxisRaw("Vertical");
         float inputH = Input.GetAxisRaw("Horizontal");
 
@@ -57,35 +66,72 @@ public class SimplePlayerMovement : MonoBehaviour
 
         float targetSpeed = isRunning ? runSpeed : walkSpeed;
 
-        float yVelocity = moveDirection.y;
+        // Keep previous Y velocity while we recalc horizontal
+        float movementDirectionY = moveDirection.y;
 
+        // Horizontal move
         moveDirection = (forward * inputV + right * inputH).normalized * targetSpeed;
 
-        // Gravity
-        moveDirection.y = yVelocity;
-        if (!controller.isGrounded)
-            moveDirection.y -= gravity * Time.deltaTime;
-        else
-            moveDirection.y = -1f;
+        // ---------- HIGH JUMP LOGIC ----------
+        if (controller.isGrounded)
+        {
+            // Start charging on first press
+            if (Input.GetButtonDown("Jump")) // "Jump" axis is mapped to Space by default
+            {
+                isChargingJump = true;
+                jumpChargeTimer = 0f;
+            }
 
+            // While holding, charge up
+            if (isChargingJump && Input.GetButton("Jump"))
+            {
+                jumpChargeTimer += Time.deltaTime;
+                jumpChargeTimer = Mathf.Min(jumpChargeTimer, maxJumpChargeTime);
+            }
+
+            // On release, perform jump
+            if (isChargingJump && Input.GetButtonUp("Jump"))
+            {
+                float charge01 = Mathf.Clamp01(jumpChargeTimer / maxJumpChargeTime);
+                float effectiveJump = jumpPower * Mathf.Lerp(1f, highJumpMultiplier, charge01);
+                movementDirectionY = effectiveJump;
+                isChargingJump = false;
+            }
+            else if (!isChargingJump)
+            {
+                // Keep us snapped to ground
+                movementDirectionY = -1f;
+            }
+        }
+        else
+        {
+            // In air: stop charging and let gravity act
+            isChargingJump = false;
+        }
+
+        // Apply vertical velocity & gravity
+        moveDirection.y = movementDirectionY;
+
+        if (!controller.isGrounded)
+        {
+            moveDirection.y -= gravity * Time.deltaTime;
+        }
+
+        // Finally move the controller
         controller.Move(moveDirection * Time.deltaTime);
 
         // --------------------------
-        // ANIMATIONS (SMOOTHED)
+        // ANIMATIONS
         // --------------------------
         if (anim != null)
         {
             float targetAnimSpeed = 0f;
 
-            if (isMoving)
-            {
-                targetAnimSpeed = isRunning ? 1f : 0.5f;  
-                // 1f = run, 0.5f = walk, 0f = idle
-            }
+            if (isMoving && controller.isGrounded)   // only walk/run on ground
+                targetAnimSpeed = isRunning ? 1f : 0.5f;
 
-            // Smoothly transition between idle, walk, run
+            // Smooth blend idle <-> walk <-> run
             anim.SetFloat("Speed", targetAnimSpeed, 0.15f, Time.deltaTime);
-
             anim.SetBool("Running", isRunning);
         }
     }
