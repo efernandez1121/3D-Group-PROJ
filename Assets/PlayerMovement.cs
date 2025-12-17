@@ -1,262 +1,150 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class SimplePlayerMovement : MonoBehaviour
 {
-    // imports
-    public ActionDetector detector;
-
     [Header("References")]
     public Camera playerCamera;
 
-    [Header("Movement")]
+    [Header("Movement Settings")]
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
-    public float jumpPower = 7f;
-    public float gravity = 10f;
+    public float gravity = 20f;
+
+    [Header("Jump Settings")]
+    public float jumpPower = 6f;          // normal jump
+    public float maxJumpChargeTime = 1f;  // how long you can hold space
+    public float highJumpMultiplier = 2f; // how much stronger a fully charged jump is
+
+    [Header("Look Settings")]
     public float lookSpeed = 2f;
-    public float lookXLimit = 45f;
+    public float lookXLimit = 85f;
 
-    [Header("Crouch")]
-    public float defaultHeight = 2f;
-    public float crouchHeight = 1f;
-    public float crouchSpeed = 3f;
-    public KeyCode crouchKey = KeyCode.R;
-
-    [Header("Push / Pull")]
-    [Tooltip("Layer(s) of objects you can grab/push. Create a 'Pushable' layer and assign it to boxes, etc.")]
-    public LayerMask pushableMask;
-    [Tooltip("Max distance for raycast to start a grab.")]
-    public float interactDistance = 3f;
-    [Tooltip("Where a grabbed object tries to stay relative to the camera.")]
-    public float holdDistance = 2f;
-    [Tooltip("Spring force that pulls the grabbed object toward the hold point.")]
-    public float pullForce = 60f;
-    [Tooltip("Damping to reduce oscillation of the grabbed object.")]
-    public float pullDamping = 8f;
-    [Tooltip("Max mass you are allowed to grab.")]
-    public float maxGrabMass = 50f;
-    [Tooltip("How strongly you shove rigidbodies when you run into them.")]
-    public float pushPower = 2.0f;
-    [Tooltip("Key to grab/release objects.")]
-    public KeyCode interactKey = KeyCode.E;
-    [Tooltip("Secondary release key (e.g., right mouse).")]
-    public KeyCode altReleaseKey = KeyCode.Mouse1;
-
-    [Header("High Jump (Charge)")]
-    [Tooltip("Max time (seconds) you can charge while holding Space on ground.")]
-    public float maxJumpChargeTime = 1.0f;
-    [Tooltip("At full charge, jump power is multiplied by this.")]
-    public float highJumpMultiplier = 1.8f;
-
+    private CharacterController controller;
     private Vector3 moveDirection = Vector3.zero;
-    private float rotationX = 0;
-    private CharacterController characterController;
-    private bool canMove = true;
+    private float rotationX = 0f;
 
-    // Push / Pull state
-    private Rigidbody grabbedRb;
-    private Transform holdPoint;
-
-    // Jump charge state
-    private float jumpChargeTimer = 0f;
+    // High-jump state
     private bool isChargingJump = false;
+    private float jumpChargeTimer = 0f;
+
+    // Animator
+    private Animator anim;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        if (playerCamera == null)
-        {
-            playerCamera = Camera.main;
-        }
+        controller = GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>();
 
-        // Create a hold point in front of camera if not set
-        GameObject hold = new GameObject("HoldPoint");
-        hold.transform.SetParent(playerCamera.transform);
-        hold.transform.localPosition = new Vector3(0, 0, holdDistance);
-        hold.transform.localRotation = Quaternion.identity;
-        holdPoint = hold.transform;
+        if (playerCamera == null)
+            playerCamera = Camera.main;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        if (detector == null)
-        {
-            detector = FindObjectOfType<ActionDetector>();
-            if (detector == null)
-            {
-                Debug.LogError("No ActionDetector found in the scene!");
-            }
-        }
     }
 
     void Update()
     {
-        // --- Movement input ---
+        HandleMovementAndJump();
+        HandleLook();
+    }
+
+    // --------------------------
+    // MOVEMENT + HIGH JUMP
+    // --------------------------
+    void HandleMovementAndJump()
+    {
+        // Basic movement
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
+        float inputV = Input.GetAxisRaw("Vertical");
+        float inputH = Input.GetAxisRaw("Horizontal");
+
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        bool isMoving = (inputV != 0 || inputH != 0);
 
-        float baseSpeed = isRunning ? runSpeed : walkSpeed;
+        float targetSpeed = isRunning ? runSpeed : walkSpeed;
 
-        float curSpeedX = canMove ? baseSpeed * Input.GetAxis("Vertical") : 0f;
-        float curSpeedY = canMove ? baseSpeed * Input.GetAxis("Horizontal") : 0f;
-
+        // Keep previous Y velocity while we recalc horizontal
         float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        Vector3 horizontal = new Vector3(moveDirection.x, 0, moveDirection.z); // used to determine if the player is moving or not for stamina
-        bool isMoving = horizontal.sqrMagnitude > 0.001f; // tiny threshold
-        detector.isRunning = horizontal.sqrMagnitude > 0.001f;
+        // Horizontal move
+        moveDirection = (forward * inputV + right * inputH).normalized * targetSpeed;
 
-        // --- High jump (charge on ground, release to jump) ---
-        if (characterController.isGrounded)
+        // ---------- HIGH JUMP LOGIC ----------
+        if (controller.isGrounded)
         {
-            // Start or continue charging when holding Jump on ground
-            if (Input.GetButtonDown("Jump"))
+            // Start charging on first press
+            if (Input.GetButtonDown("Jump")) // "Jump" axis is mapped to Space by default
             {
                 isChargingJump = true;
                 jumpChargeTimer = 0f;
             }
+
+            // While holding, charge up
             if (isChargingJump && Input.GetButton("Jump"))
             {
                 jumpChargeTimer += Time.deltaTime;
                 jumpChargeTimer = Mathf.Min(jumpChargeTimer, maxJumpChargeTime);
             }
 
-            // Release to jump
+            // On release, perform jump
             if (isChargingJump && Input.GetButtonUp("Jump"))
             {
                 float charge01 = Mathf.Clamp01(jumpChargeTimer / maxJumpChargeTime);
                 float effectiveJump = jumpPower * Mathf.Lerp(1f, highJumpMultiplier, charge01);
-                moveDirection.y = effectiveJump;
+                movementDirectionY = effectiveJump;
                 isChargingJump = false;
             }
-            else
+            else if (!isChargingJump)
             {
-                // If we never released (e.g., not pressing jump), keep last vertical vel
-                moveDirection.y = movementDirectionY;
+                // Keep us snapped to ground
+                movementDirectionY = -1f;
             }
         }
         else
         {
-            isChargingJump = false; // lose charge in air
-            moveDirection.y = movementDirectionY;
+            // In air: stop charging and let gravity act
+            isChargingJump = false;
         }
 
-        // Extra gravity while in air
-        if (!characterController.isGrounded)
+        // Apply vertical velocity & gravity
+        moveDirection.y = movementDirectionY;
+
+        if (!controller.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }
 
-        // --- Crouch toggle/hold ---
-        if (Input.GetKey(crouchKey) && canMove)
-        {
-            characterController.height = crouchHeight;
-            walkSpeed = crouchSpeed;
-            runSpeed = crouchSpeed;
-        }
-        else
-        {
-            characterController.height = defaultHeight;
-            walkSpeed = 6f;
-            runSpeed = 12f;
-        }
+        // Finally move the controller
+        controller.Move(moveDirection * Time.deltaTime);
 
-        // --- Apply motion ---
-        characterController.Move(moveDirection * Time.deltaTime);
+        // --------------------------
+        // ANIMATIONS
+        // --------------------------
+        if (anim != null)
+        {
+            float targetAnimSpeed = 0f;
 
-        // --- Look ---
-        if (canMove)
-        {
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
-        }
+            if (isMoving && controller.isGrounded)   // only walk/run on ground
+                targetAnimSpeed = isRunning ? 1f : 0.5f;
 
-        // --- Push / Pull: start/stop grab ---
-        if (Input.GetKeyDown(interactKey))
-        {
-            if (grabbedRb == null)
-                TryGrab();
-            else
-                ReleaseGrab();
-        }
-        if (Input.GetKeyDown(altReleaseKey) && grabbedRb != null)
-        {
-            ReleaseGrab();
-        }
-
-        // --- While grabbing, pull the object toward hold point ---
-        if (grabbedRb != null)
-        {
-            UpdateGrabbed();
+            // Smooth blend idle <-> walk <-> run
+            anim.SetFloat("Speed", targetAnimSpeed, 0.15f, Time.deltaTime);
+            anim.SetBool("Running", isRunning);
         }
     }
 
-    // Called automatically when CharacterController bumps something.
-    void OnControllerColliderHit(ControllerColliderHit hit)
+    // --------------------------
+    // CAMERA LOOK
+    // --------------------------
+    void HandleLook()
     {
-        // Passive pushing: shove rigidbodies when you walk into them
-        Rigidbody rb = hit.collider.attachedRigidbody;
-        if (rb == null || rb.isKinematic) return;
+        rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+        rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
 
-        // Never push objects below us (e.g., standing on them)
-        if (hit.moveDirection.y < -0.3f) return;
-
-        // Apply a velocity in the horizontal move direction
-        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-        rb.velocity = pushDir * pushPower;
-    }
-
-    // --- Push/Pull helpers ---
-    void TryGrab()
-    {
-        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, pushableMask, QueryTriggerInteraction.Ignore))
-        {
-            Rigidbody rb = hit.rigidbody;
-            if (rb != null && !rb.isKinematic && rb.mass <= maxGrabMass)
-            {
-                grabbedRb = rb;
-                grabbedRb.useGravity = true; // keep gravity so it feels natural
-                grabbedRb.drag = 0.5f;       // a bit of drag helps stability
-            }
-        }
-    }
-
-    void ReleaseGrab()
-    {
-        if (grabbedRb == null) return;
-        grabbedRb.drag = 0f;
-        grabbedRb = null;
-    }
-
-    void UpdateGrabbed()
-    {
-        // Desired position in front of camera
-        Vector3 targetPos = holdPoint.position;
-        Vector3 toTarget = targetPos - grabbedRb.worldCenterOfMass;
-
-        // Spring toward hold point with damping to avoid jitter
-        Vector3 desiredAccel = toTarget * pullForce - grabbedRb.velocity * pullDamping;
-        grabbedRb.AddForce(desiredAccel, ForceMode.Acceleration);
-
-        // Optional: keep object roughly facing forward (gentle)
-        grabbedRb.AddTorque(-grabbedRb.angularVelocity * 2f, ForceMode.Acceleration);
-
-        // If object gets too far (line broken), auto release
-        float breakDistance = Mathf.Max(holdDistance * 3f, 6f);
-        if (toTarget.sqrMagnitude > breakDistance * breakDistance)
-        {
-            ReleaseGrab();
-        }
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+        transform.rotation *= Quaternion.Euler(0f, Input.GetAxis("Mouse X") * lookSpeed, 0f);
     }
 }
