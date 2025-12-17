@@ -1259,7 +1259,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5762463009485590720, guid: 5fa23f120128be34d823c37cfc58a618, type: 3}
       propertyPath: delay
-      value: 0.5
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 5762463009485590720, guid: 5fa23f120128be34d823c37cfc58a618, type: 3}
       propertyPath: action
@@ -10243,6 +10243,7 @@ GameObject:
   - component: {fileID: 1691874591}
   - component: {fileID: 1691874590}
   - component: {fileID: 1691874589}
+  - component: {fileID: 1691874592}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -10330,6 +10331,43 @@ Transform:
   - {fileID: 585826079}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1691874592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691874588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90eaa0604fdbb154eae1928cea59ebc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detector: {fileID: 0}
+  playerCamera: {fileID: 0}
+  walkSpeed: 6
+  runSpeed: 12
+  jumpPower: 7
+  gravity: 10
+  lookSpeed: 2
+  lookXLimit: 45
+  defaultHeight: 2
+  crouchHeight: 1
+  crouchSpeed: 3
+  crouchKey: 114
+  pushableMask:
+    serializedVersion: 2
+    m_Bits: 0
+  interactDistance: 3
+  holdDistance: 2
+  pullForce: 60
+  pullDamping: 8
+  maxGrabMass: 50
+  pushPower: 2
+  interactKey: 101
+  altReleaseKey: 324
+  maxJumpChargeTime: 1
+  highJumpMultiplier: 1.8
 --- !u!1001 &1705517600
 PrefabInstance:
   m_ObjectHideFlags: 0
