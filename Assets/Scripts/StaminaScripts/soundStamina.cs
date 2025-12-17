@@ -53,7 +53,7 @@ public class staminaSound : MonoBehaviour
 
         if (action.isRunning)
         {
-            Debug.Log("running somewhere");
+            Debug.Log("Currently running somewhere");
         }
 
         if (action.gotBadFish)
