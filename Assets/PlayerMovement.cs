@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
+    // imports
+    public ActionDetector detector;
+
     [Header("References")]
     public Camera playerCamera;
 
@@ -87,6 +92,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 right = transform.TransformDirection(Vector3.right);
 
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        detector.isRunning = isRunning; //stamina running flag
+
         float baseSpeed = isRunning ? runSpeed : walkSpeed;
 
         float curSpeedX = canMove ? baseSpeed * Input.GetAxis("Vertical") : 0f;
