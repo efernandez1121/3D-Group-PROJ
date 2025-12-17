@@ -51,5 +51,9 @@
         "temp/": true,
         "Temp/": true
     },
+<<<<<<< HEAD
     "dotnet.defaultSolution": "3D-Group-PROJ.sln"
+=======
+    "dotnet.defaultSolution": "3GAME.sln"
+>>>>>>> de50564dcaef557db62496ad51a86ecf96837e7f
 }
