@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 
 //this file handles all the math calculations that'll be running
@@ -13,6 +14,7 @@ public class Functions : MonoBehaviour
     public ActionDetector action; //add GameObject
 
     public float currStamina;
+    public float delay = 0.5f;
 
     private void Start()
     {
@@ -41,15 +43,33 @@ public class Functions : MonoBehaviour
         if (action.isHit || action.gotBadFish)
         {
             currStamina -= cost;
+            //reset flags
+            action.isHit = false; 
+            action.gotBadFish = false;
+
         }
 
         //check for stamina restore
         if (action.wonMiniGame)
         {
             currStamina += restore;
+            //reset flags
+            action.wonMiniGame = false;
+        }
+
+        //check for if out of stamina
+        if (currStamina <= 0f)
+        {
+            StartCoroutine(Delay());
         }
 
         //adjust stamina to make sure that it doesn't go below 0 or above max
         currStamina = UnityEngine.Mathf.Clamp(currStamina, 0, manager.maxStamina);
+    }
+
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("GameOver"); 
     }
 }

@@ -1258,6 +1258,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5762463009485590720, guid: 5fa23f120128be34d823c37cfc58a618, type: 3}
+      propertyPath: delay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762463009485590720, guid: 5fa23f120128be34d823c37cfc58a618, type: 3}
       propertyPath: action
       value: 
       objectReference: {fileID: 471387687}
@@ -5902,67 +5906,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3388575076450907481, guid: b0c6a676588a7c24d9d315f9ff65b51f, type: 3}
   m_PrefabInstance: {fileID: 911663557}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &929992906
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2074950610450964704, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: action
-      value: 
-      objectReference: {fileID: 471387687}
-    - target: {fileID: 2186861736304572850, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: m_Name
-      value: audioSourcePlaceholder
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343768135478938576, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343768135478938576, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343768135478938576, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343768135478938576, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343768135478938576, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343768135478938576, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343768135478938576, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343768135478938576, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343768135478938576, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343768135478938576, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
 --- !u!1001 &941883113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9922,7 +9865,7 @@ GameObject:
   - component: {fileID: 1623754874}
   - component: {fileID: 1623754873}
   - component: {fileID: 1623754872}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10300,9 +10243,9 @@ GameObject:
   - component: {fileID: 1691874591}
   - component: {fileID: 1691874590}
   - component: {fileID: 1691874589}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13916,7 +13859,6 @@ SceneRoots:
   - {fileID: 1691874591}
   - {fileID: 651824954}
   - {fileID: 135013379}
-  - {fileID: 929992906}
   - {fileID: 558088315}
   - {fileID: 1613727239}
   - {fileID: 158675969}
