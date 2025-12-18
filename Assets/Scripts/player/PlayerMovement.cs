@@ -5,6 +5,7 @@ public class SimplePlayerMovement : MonoBehaviour
 {
     [Header("References")]
     public Camera playerCamera;
+    public ActionDetector detector;
 
     [Header("Movement Settings")]
     public float walkSpeed = 6f;
@@ -19,6 +20,11 @@ public class SimplePlayerMovement : MonoBehaviour
     [Header("Look Settings")]
     public float lookSpeed = 2f;
     public float lookXLimit = 85f;
+
+    [Header("Knockback Settings")]
+    public float knockBackStrength = 100f; //how far they're pushed
+    public float endknockBack = 30f; //how long it takes for the knockback to stop
+    private Vector3 knockBackSpeed = Vector3.zero;
 
     private CharacterController controller;
     private Vector3 moveDirection = Vector3.zero;
@@ -41,8 +47,30 @@ public class SimplePlayerMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
 
+        //assign the action detector for stamina manegement
+        if (detector == null)
+        {
+            detector = FindObjectOfType<ActionDetector>();
+            if (detector == null)
+            {
+                Debug.LogError("No ActionDetector found in the scene!");
+            }
+        }
+    }
+    private void OnEnable()
+    {
+        if (PersistentPlayerData.Instance != null)
+        {
+            controller = GetComponent<CharacterController>();
+
+            controller.enabled = false; // prevent CC from fighting the teleport
+            transform.position = PersistentPlayerData.Instance.savedPlayerPosition;
+            controller.enabled = true;
+
+            Debug.Log($"Spawning at {transform.position}");
+        }
+    }
     void Update()
     {
         HandleMovementAndJump();
@@ -64,6 +92,10 @@ public class SimplePlayerMovement : MonoBehaviour
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
         bool isMoving = (inputV != 0 || inputH != 0);
 
+        //for stamina
+        detector.isWalking = isMoving;
+        detector.isRunning = isRunning && isMoving;
+
         float targetSpeed = isRunning ? runSpeed : walkSpeed;
 
         // Keep previous Y velocity while we recalc horizontal
@@ -71,6 +103,7 @@ public class SimplePlayerMovement : MonoBehaviour
 
         // Horizontal move
         moveDirection = (forward * inputV + right * inputH).normalized * targetSpeed;
+
 
         // ---------- HIGH JUMP LOGIC ----------
         if (controller.isGrounded)
@@ -117,8 +150,11 @@ public class SimplePlayerMovement : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
         }
 
+        // Combine normal movement with potential knockback
+        Vector3 totalMovement = moveDirection + knockBackSpeed;
+
         // Finally move the controller
-        controller.Move(moveDirection * Time.deltaTime);
+        controller.Move(totalMovement * Time.deltaTime);
 
         // --------------------------
         // ANIMATIONS
@@ -134,6 +170,37 @@ public class SimplePlayerMovement : MonoBehaviour
             anim.SetFloat("Speed", targetAnimSpeed, 0.15f, Time.deltaTime);
             anim.SetBool("Running", isRunning);
         }
+        // ---------- KNOCKBACK FADE OUT ----------
+        if (knockBackSpeed.sqrMagnitude > 0.001f)
+        {
+            knockBackSpeed = Vector3.Lerp(knockBackSpeed, Vector3.zero, endknockBack * Time.deltaTime);
+        }
+    }
+
+    // --------------------------
+    // APPLYING KNOCKBACK 
+    // --------------------------
+    public void KnockBack()
+    {
+        //get direction the player was coming from
+        Vector3 xMove = new Vector3(moveDirection.x, 0f, moveDirection.z);
+
+        if (xMove.sqrMagnitude < 0.001f)
+        {
+            //if not moving, uses the direction the player is facing
+            xMove = transform.forward;
+        }
+        Vector3 knockBackDir = -xMove.normalized;
+        knockBackSpeed = knockBackDir * knockBackStrength;
+    }
+
+    // --------------------------
+    // GET CURRENT POSITION
+    // --------------------------
+    public Vector3 CurrPosition()
+    {
+        Vector3 currPos = transform.position;
+        return currPos;
     }
 
     // --------------------------

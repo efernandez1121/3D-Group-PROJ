@@ -11,6 +11,11 @@ public class StaminaBar : MonoBehaviour
 
     //UI import
     public Image staminaBar;
+    // Update is called once per frame
+    void OnEnable()
+    {
+        staminaBar.fillAmount = staminaAmt.currStamina / manager.maxStamina;
+    }
 
     // Update is called once per frame
     void Update()

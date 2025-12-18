@@ -10,7 +10,7 @@ public class sideColliders : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            mainThwomp.PlayHitSound();
+            mainThwomp.collisionActions();
         }
     }
 }

@@ -8,11 +8,12 @@ using UnityEngine;
 public class ManagerStamina : ScriptableObject
 {
     [Header("Core amts")]
-    public float maxStamina = 20f;
+    public float maxStamina = 80f;
     public float minStamina = 0f;
 
     [Header("Action Costs")]
-    public float runCost = 1f;
+    public float walkCost = 1f;
+    public float runCost = 3f;
     public float pushPullCost = 2f;
 
     [Header("Damage Costs")] //Thwump attacks + bad fish
@@ -26,9 +27,14 @@ public class ManagerStamina : ScriptableObject
     //Functions
     //Checks and returns the correct drain amount based on the activity being performed
     // note that as implemented the costs stack; ie running + pulling stacks costs
-    public float getDrainAmt(bool isRunning, bool isPP, bool isHit, bool gotBadFish)
+    public float getDrainAmt(bool isWalking, bool isRunning, bool isPP, bool isHit, bool gotBadFish)
     {
         float drainAmt = 0f;
+
+        if (isWalking)
+        {
+            drainAmt += walkCost;
+        }
 
         if (isRunning) {
             drainAmt += runCost;

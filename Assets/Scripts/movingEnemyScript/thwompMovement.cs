@@ -10,6 +10,7 @@ public class thwompMovement : MonoBehaviour
 {
     //references
     public ActionDetector detector;
+    public SimplePlayerMovement player;
 
     //sound
     private AudioSource audioSource;
@@ -19,7 +20,7 @@ public class thwompMovement : MonoBehaviour
     [Header("settings")]
     [Header("Vertical positioning")]
     public float topHeight = 7f;
-    public float bottomHeight = 1f; // 0 made it go too deep into ground
+    public float bottomHeight = 0.5f; // 0 made it go too deep into ground
 
     [Header("Horizontal-shaking range")]
     public float leftAndRightEdge = 0.35f;
@@ -44,12 +45,23 @@ public class thwompMovement : MonoBehaviour
     [Header("Trackers")]
     public float currSpeed = 10f; //same as speed, but it'll be changed later
     public float xStart;
+    public float yStart;
     public float lastHitSound = -999f; //set it so that it def won't trigger immediately
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>(); // makees the thwump the audio source
         xStart = transform.position.x; //get the marker of current x position
+        yStart = transform.position.y; // the initial y position
+
+        if (yStart <= topHeight / 2) //go down first
+        {
+            movingUp = false;
+        }
+        else
+        {
+            movingUp = true;
+        }
     }
 
     // Update is called once per frame
@@ -133,11 +145,20 @@ public class thwompMovement : MonoBehaviour
         yield return new WaitForSeconds(delay);
         wait = false;
     }
-    // also records decrease instamina
-    public void PlayHitSound()
+    // Records:
+    // decrease in stamina
+    // knockBack
+    // plays hit sound
+    public void collisionActions()
     {
         Debug.Log("playing sound");
-        detector.isHit = true;
+
+        detector.isHit = true; //triggers stamina decrease
+
+        if (player != null) //call knockback on the player
+        {
+            player.KnockBack();
+        }
         //block excessive playing of sound
         if (Time.time - lastHitSound < soundDelay)
             return;   
