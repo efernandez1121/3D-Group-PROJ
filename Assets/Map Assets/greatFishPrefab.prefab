@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6689036041284674117, guid: 25327911ddc534bbc854b278e73393fb, type: 3}
       propertyPath: m_Name
-      value: green_fish
+      value: greatFishPrefab
       objectReference: {fileID: 0}
     - target: {fileID: -6689036041284674117, guid: 25327911ddc534bbc854b278e73393fb, type: 3}
       propertyPath: m_IsActive
@@ -59,5 +59,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -6689036041284674117, guid: 25327911ddc534bbc854b278e73393fb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2958381182656606293}
   m_SourcePrefab: {fileID: -5645937942226959685, guid: 25327911ddc534bbc854b278e73393fb, type: 3}
+--- !u!1 &3596938135500058094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6689036041284674117, guid: 25327911ddc534bbc854b278e73393fb, type: 3}
+  m_PrefabInstance: {fileID: 1351397665609904213}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2958381182656606293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3596938135500058094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500457f25c4b2f9478417555ac0a335e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

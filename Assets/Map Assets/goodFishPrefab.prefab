@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6689036041284674117, guid: ee489d846efeb4110a50a9d4fff4b013, type: 3}
       propertyPath: m_Name
-      value: orange_fish
+      value: goodFishPrefab
       objectReference: {fileID: 0}
     - target: {fileID: -6689036041284674117, guid: ee489d846efeb4110a50a9d4fff4b013, type: 3}
       propertyPath: m_IsActive
@@ -71,5 +71,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -6689036041284674117, guid: ee489d846efeb4110a50a9d4fff4b013, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4487966494317828279}
   m_SourcePrefab: {fileID: -5645937942226959685, guid: ee489d846efeb4110a50a9d4fff4b013, type: 3}
+--- !u!1 &5810500069887991393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6689036041284674117, guid: ee489d846efeb4110a50a9d4fff4b013, type: 3}
+  m_PrefabInstance: {fileID: 8325130608904717274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4487966494317828279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5810500069887991393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500457f25c4b2f9478417555ac0a335e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
