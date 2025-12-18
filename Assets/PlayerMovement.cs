@@ -25,8 +25,9 @@ public class SimplePlayerMovement : MonoBehaviour
     public float lookXLimit = 85f;
 
     [Header("Knockback Settings")]
-    public float knockBackStrenght = 5f; //how far they're pushed
+    public float knockBackStrength = 5f; //how far they're pushed
     public float endknockBack = 3f; //how long it takes for the knockback to stop
+    private Vector3 knockBackSpeed = Vector3.zero;
 
     private CharacterController controller;
     private Vector3 moveDirection = Vector3.zero;
@@ -91,6 +92,7 @@ public class SimplePlayerMovement : MonoBehaviour
         // Horizontal move
         moveDirection = (forward * inputV + right * inputH).normalized * targetSpeed;
 
+        
         // ---------- HIGH JUMP LOGIC ----------
         if (controller.isGrounded)
         {
@@ -136,8 +138,11 @@ public class SimplePlayerMovement : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
         }
 
+        // Combine normal movement with potential knockback
+        Vector3 totalMovement = moveDirection + knockBackSpeed;
+
         // Finally move the controller
-        controller.Move(moveDirection * Time.deltaTime);
+        controller.Move(totalMovement * Time.deltaTime);
 
         // --------------------------
         // ANIMATIONS
@@ -153,6 +158,27 @@ public class SimplePlayerMovement : MonoBehaviour
             anim.SetFloat("Speed", targetAnimSpeed, 0.15f, Time.deltaTime);
             anim.SetBool("Running", isRunning);
         }
+        // ---------- KNOCKBACK FADE OUT ----------
+        if (knockBackSpeed.sqrMagnitude > 0.001f) {
+            knockBackSpeed = Vector3.Lerp(knockBackSpeed, Vector3.zero, endknockBack * Time.deltaTime);
+        }
+    }
+
+    // --------------------------
+    // APPLYING KNOCKBACK 
+    // --------------------------
+    public void KnockBack()
+    {
+        //get direction the player was coming from
+        Vector3 xMove = new Vector3(moveDirection.x, 0f, moveDirection.z);
+
+        if (xMove.sqrMagnitude < 0.001f)
+        {
+            //if not moving, uses the direction the player is facing
+            xMove = transform.forward;
+        }
+        Vector3 knockBackDir = -xMove.normalized;
+        knockBackSpeed = knockBackDir * knockBackStrength;
     }
 
     // --------------------------

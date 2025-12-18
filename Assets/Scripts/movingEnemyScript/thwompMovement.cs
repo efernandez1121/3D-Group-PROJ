@@ -10,6 +10,7 @@ public class thwompMovement : MonoBehaviour
 {
     //references
     public ActionDetector detector;
+    public SimplePlayerMovement player;
 
     //sound
     private AudioSource audioSource;
@@ -133,11 +134,20 @@ public class thwompMovement : MonoBehaviour
         yield return new WaitForSeconds(delay);
         wait = false;
     }
-    // also records decrease instamina
-    public void PlayHitSound()
+    // Records:
+    // decrease in stamina
+    // knockBack
+    // plays hit sound
+    public void collisionActions()
     {
         Debug.Log("playing sound");
-        detector.isHit = true;
+
+        detector.isHit = true; //triggers stamina decrease
+
+        if (player != null) //call knockback on the player
+        {
+            player.KnockBack();
+        }
         //block excessive playing of sound
         if (Time.time - lastHitSound < soundDelay)
             return;   
