@@ -47,6 +47,11 @@ public class Functions : MonoBehaviour
         if (action.wonMiniGame)
         {
             currStamina += restore;
+
+            //reset flags
+            action.wonMiniGame = false;
+            action.smallRestore = false;
+            action.bigRestore = false;
         }
 
         //adjust stamina to make sure that it doesn't go below 0 or above max

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class MinigameScript : MonoBehaviour
 {
+    //references
+    public ActionDetector detector;
+
     public Image fadeImage;
     public Image upKey;
     public Image downKey;
@@ -156,16 +159,25 @@ public class MinigameScript : MonoBehaviour
         {
             Debug.Log("Big ass fish");
             fish = Instantiate<GameObject>(greatFishPrefab);
+            //stamina updates
+            detector.wonMiniGame = true;
+            detector.bigRestore = true;
         }
         else if(caughtFish)
         {
             Debug.Log("Fish");
             fish = Instantiate<GameObject>(goodFishPrefab);
+            //stamina updates
+            detector.wonMiniGame = true;
+            detector.smallRestore = true;
         }
         else
         {
-            Debug.Log("No fish");
+            Debug.Log("bad fish");
             fish = Instantiate<GameObject>(badFishPrefab);
+            //stamina updates
+            detector.wonMiniGame = false;
+            detector.gotBadFish = true;
         }
 
         fishingSoundScript.CallFishSound(caughtGreatFish, caughtFish);
