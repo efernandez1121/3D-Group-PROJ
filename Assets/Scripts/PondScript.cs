@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class PondScript : MonoBehaviour
 {
     [Header("References")]
-    public PersistentPlayerData playerData;
     public SimplePlayerMovement player;
     public Functions staminaData;
 
@@ -53,10 +52,8 @@ public class PondScript : MonoBehaviour
             yield return null;
         }
         //save player data
-        playerData.savedPlayerPosition = player.CurrPosition();
-        playerData.savedStamina = staminaData.currStamina;
-        Debug.Log($"Current positin is{playerData.savedPlayerPosition}");
-        Debug.Log($"Current stamina is{playerData.savedStamina}");
+        PersistentPlayerData.Instance.savedPlayerPosition = player.CurrPosition();
+        PersistentPlayerData.Instance.savedStamina = staminaData.currStamina;
 
         //Load scene for fishing minigame
         SceneManager.LoadScene("MinigameScene");

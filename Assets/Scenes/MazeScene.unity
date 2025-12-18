@@ -5300,7 +5300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bade81f87c9fe9d4aa014d67edc5b1cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 1276736257}
   player: {fileID: 2025839631}
   staminaData: {fileID: 1605627355}
   text: {fileID: 264073926}
@@ -13425,6 +13424,10 @@ MonoBehaviour:
   manager: {fileID: 11400000, guid: ab744e91b31ff124d81b761b57ed55c4, type: 2}
   savedPlayerPosition: {x: 0, y: 0, z: 0}
   savedStamina: 0
+  wonMiniGame: 0
+  smallRestore: 0
+  bigRestore: 0
+  gotBadFish: 0
 --- !u!4 &1276736258
 Transform:
   m_ObjectHideFlags: 0
@@ -21396,7 +21399,7 @@ MonoBehaviour:
   playerCamera: {fileID: 1810517814}
   detector: {fileID: 471387687}
   walkSpeed: 10
-  runSpeed: 20
+  runSpeed: 25
   gravity: 20
   jumpPower: 6
   maxJumpChargeTime: 1

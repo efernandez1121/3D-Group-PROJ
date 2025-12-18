@@ -171,8 +171,8 @@ public class MinigameScript : MonoBehaviour
             fish = Instantiate<GameObject>(greatFishPrefab);
 
             //stamina updates
-            detector.wonMiniGame = true;
-            detector.bigRestore = true;
+            PersistentPlayerData.Instance.wonMiniGame = true;
+            PersistentPlayerData.Instance.bigRestore = true;
         }
         else if(caughtFish)
         {
@@ -180,8 +180,8 @@ public class MinigameScript : MonoBehaviour
             fish = Instantiate<GameObject>(goodFishPrefab);
 
             //stamina updates
-            detector.wonMiniGame = true;
-            detector.smallRestore = true;
+            PersistentPlayerData.Instance.wonMiniGame = true;
+            PersistentPlayerData.Instance.smallRestore = true;
         }
         else
         {
@@ -189,8 +189,8 @@ public class MinigameScript : MonoBehaviour
             fish = Instantiate<GameObject>(badFishPrefab);
 
             //stamina updates
-            detector.wonMiniGame = false;
-            detector.gotBadFish = true;
+            PersistentPlayerData.Instance.wonMiniGame = false;
+            PersistentPlayerData.Instance.gotBadFish = true;
         }
 
         fishingSoundScript.CallFishSound(caughtGreatFish, caughtFish);

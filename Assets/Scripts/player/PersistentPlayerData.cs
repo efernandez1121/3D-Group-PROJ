@@ -12,7 +12,11 @@ public class PersistentPlayerData : MonoBehaviour
     public Vector3 savedPlayerPosition;
     public float savedStamina;
 
-    //public bool hasPosition = false; //for detecting position ex
+    //minigame related values
+    public bool wonMiniGame = false;
+    public bool smallRestore = false;    // got small fish from minigame
+    public bool bigRestore = false; // got big fish from minigame
+    public bool gotBadFish = false;  // Wether the player lost the minigame and got the bad fish
 
     // using Awake for initiliazation
     void Awake()
@@ -33,9 +37,4 @@ public class PersistentPlayerData : MonoBehaviour
         savedStamina = manager.maxStamina;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
