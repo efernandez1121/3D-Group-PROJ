@@ -20,6 +20,10 @@ public class SimplePlayerMovement : MonoBehaviour
     public float lookSpeed = 2f;
     public float lookXLimit = 85f;
 
+    [Header("Knockback Settings")]
+    public float knockBackStrenght = 5f; //how far they're pushed
+    public float endknockBack = 3f; //how long it takes for the knockback to stop
+
     private CharacterController controller;
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0f;
