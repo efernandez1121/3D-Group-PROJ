@@ -33,7 +33,7 @@ public class staminaSound : MonoBehaviour
     {
         action.isHit = Input.GetKeyDown("h");
         action.isPP = Input.GetKey("e");
-        action.isRunning = Input.GetKey("w") || Input.GetKey("a") ||
+        action.isWalking = Input.GetKey("w") || Input.GetKey("a") ||
                             Input.GetKey("s") || Input.GetKey("d");
 
         action.gotBadFish = Input.GetKeyDown("b");
@@ -51,7 +51,7 @@ public class staminaSound : MonoBehaviour
             Debug.Log("pushing/pulling");
         }
 
-        if (action.isRunning)
+        if (action.isWalking)
         {
             Debug.Log("running somewhere");
         }
