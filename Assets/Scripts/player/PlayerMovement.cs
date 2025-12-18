@@ -3,12 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class SimplePlayerMovement : MonoBehaviour
 {
-
-    // imports
-    public ActionDetector detector;
-
     [Header("References")]
     public Camera playerCamera;
+    public ActionDetector detector;
 
     [Header("Movement Settings")]
     public float walkSpeed = 6f;
@@ -42,6 +39,10 @@ public class SimplePlayerMovement : MonoBehaviour
 
     void Start()
     {
+        if (PersistentPlayerData.Instance != null) {
+            transform.position = PersistentPlayerData.Instance.savedPlayerPosition; //sets the player to the saved position
+        }    
+
         controller = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
 
@@ -183,6 +184,15 @@ public class SimplePlayerMovement : MonoBehaviour
         }
         Vector3 knockBackDir = -xMove.normalized;
         knockBackSpeed = knockBackDir * knockBackStrength;
+    }
+
+    // --------------------------
+    // GET CURRENT POSITION
+    // --------------------------
+    public Vector3 CurrPosition()
+    {
+        Vector3 currPos = transform.position;
+        return currPos;
     }
 
     // --------------------------

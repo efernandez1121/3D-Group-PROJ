@@ -159,6 +159,7 @@ public class MinigameScript : MonoBehaviour
         {
             Debug.Log("Big ass fish");
             fish = Instantiate<GameObject>(greatFishPrefab);
+
             //stamina updates
             detector.wonMiniGame = true;
             detector.bigRestore = true;
@@ -167,6 +168,7 @@ public class MinigameScript : MonoBehaviour
         {
             Debug.Log("Fish");
             fish = Instantiate<GameObject>(goodFishPrefab);
+
             //stamina updates
             detector.wonMiniGame = true;
             detector.smallRestore = true;
@@ -175,6 +177,7 @@ public class MinigameScript : MonoBehaviour
         {
             Debug.Log("bad fish");
             fish = Instantiate<GameObject>(badFishPrefab);
+
             //stamina updates
             detector.wonMiniGame = false;
             detector.gotBadFish = true;

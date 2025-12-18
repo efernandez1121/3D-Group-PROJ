@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class PondScript : MonoBehaviour
 {
+    [Header("References")]
+    public PersistentPlayerData playerData;
+    public SimplePlayerMovement player;
+
     public GameObject text;
     public Image fadeImage;
     private bool seesPlayer = false; 
@@ -47,6 +51,9 @@ public class PondScript : MonoBehaviour
             fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, alpha);
             yield return null;
         }
+        //save player position
+        playerData.savedPlayerPosition = player.CurrPosition();
+        Debug.Log($"Current positin is{playerData.savedPlayerPosition}");
 
         //Load scene for fishing minigame
         SceneManager.LoadScene("MinigameScene");
