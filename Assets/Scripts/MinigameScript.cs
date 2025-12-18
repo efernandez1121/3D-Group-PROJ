@@ -50,6 +50,16 @@ public class MinigameScript : MonoBehaviour
 
         //False is passed in so an easier pattern is played first
         StartCoroutine(StartMinigame(false));
+
+        //assign the action detector for stamina manegement
+        if (detector == null)
+        {
+            detector = FindObjectOfType<ActionDetector>();
+            if (detector == null)
+            {
+                Debug.LogError("No ActionDetector found in the scene!");
+            }
+        }
     }
 
     // Update is called once per frame
@@ -332,7 +342,7 @@ public class MinigameScript : MonoBehaviour
     IEnumerator Wait()
     {
         calculated = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         CalcScore();
         
     }

@@ -39,11 +39,6 @@ public class SimplePlayerMovement : MonoBehaviour
 
     void Start()
     {
-        if (PersistentPlayerData.Instance != null) {
-            transform.position = PersistentPlayerData.Instance.savedPlayerPosition; //sets the player to the saved position
-            Debug.Log($"Spawning at {transform.position}");
-        }    
-
         controller = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
 
@@ -63,7 +58,14 @@ public class SimplePlayerMovement : MonoBehaviour
             }
         }
     }
-
+    private void OnEnable()
+    {
+        if (PersistentPlayerData.Instance != null)
+        {
+            transform.position = PersistentPlayerData.Instance.savedPlayerPosition; //sets the player to the saved position
+            Debug.Log($"Spawning at {transform.position}");
+        }
+    }
     void Update()
     {
         HandleMovementAndJump();
