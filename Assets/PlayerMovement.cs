@@ -25,8 +25,8 @@ public class SimplePlayerMovement : MonoBehaviour
     public float lookXLimit = 85f;
 
     [Header("Knockback Settings")]
-    public float knockBackStrength = 5f; //how far they're pushed
-    public float endknockBack = 3f; //how long it takes for the knockback to stop
+    public float knockBackStrength = 100f; //how far they're pushed
+    public float endknockBack = 30f; //how long it takes for the knockback to stop
     private Vector3 knockBackSpeed = Vector3.zero;
 
     private CharacterController controller;

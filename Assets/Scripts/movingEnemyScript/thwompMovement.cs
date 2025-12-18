@@ -20,7 +20,7 @@ public class thwompMovement : MonoBehaviour
     [Header("settings")]
     [Header("Vertical positioning")]
     public float topHeight = 7f;
-    public float bottomHeight = 1f; // 0 made it go too deep into ground
+    public float bottomHeight = 0.5f; // 0 made it go too deep into ground
 
     [Header("Horizontal-shaking range")]
     public float leftAndRightEdge = 0.35f;
