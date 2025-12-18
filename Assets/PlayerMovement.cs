@@ -3,6 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class SimplePlayerMovement : MonoBehaviour
 {
+
+    // imports
+    public ActionDetector detector;
+
     [Header("References")]
     public Camera playerCamera;
 
@@ -45,6 +49,16 @@ public class SimplePlayerMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //assign the action detector for stamina manegement
+        if (detector == null)
+        {
+            detector = FindObjectOfType<ActionDetector>();
+            if (detector == null)
+            {
+                Debug.LogError("No ActionDetector found in the scene!");
+            }
+        }
     }
 
     void Update()
@@ -67,6 +81,7 @@ public class SimplePlayerMovement : MonoBehaviour
 
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
         bool isMoving = (inputV != 0 || inputH != 0);
+        detector.isRunning = isMoving; //for stamina
 
         float targetSpeed = isRunning ? runSpeed : walkSpeed;
 
