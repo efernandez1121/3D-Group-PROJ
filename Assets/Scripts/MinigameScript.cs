@@ -16,6 +16,8 @@ public class MinigameScript : MonoBehaviour
     public GameObject goodFishPrefab;
     public GameObject greatFishPrefab;
 
+    public FishingSoundScript fishingSoundScript;
+
     public bool canInput = false;
     private int currPatternLength = 3;
 
@@ -28,6 +30,7 @@ public class MinigameScript : MonoBehaviour
 
     private bool caughtFish = false;
     private bool caughtGreatFish = false;
+    private bool calculated = false;
 
     private float fadeDuration = 1.5f;
     private float defaultGray = 60f;
@@ -41,6 +44,7 @@ public class MinigameScript : MonoBehaviour
     void Start()
     {
         StartCoroutine(FadeIn());
+
         //False is passed in so an easier pattern is played first
         StartCoroutine(StartMinigame(false));
     }
@@ -127,13 +131,14 @@ public class MinigameScript : MonoBehaviour
                 {
                     caughtFish = true;
                 }
+                fishingSoundScript.CallGoodJobSound();
                 attemptsLeft--;
             }
 
             if(attemptsLeft == 0)
             {
                 canInput = false;
-                CalcScore();
+                StartCoroutine(Wait());
             }
 
             if((patternList.Count == 0 || !successfulAttempt) && attemptsLeft > 0)
@@ -164,6 +169,7 @@ public class MinigameScript : MonoBehaviour
             fish = Instantiate<GameObject>(badFishPrefab);
         }
 
+        fishingSoundScript.CallFishSound(caughtGreatFish, caughtFish);
         StartCoroutine(FadeOut());
     }
 
@@ -224,21 +230,25 @@ public class MinigameScript : MonoBehaviour
             switch (patternList[i])
             {
                 case upDir:
+                    fishingSoundScript.CallUpSound();
                     upKey.color = new Color(highlightRed / 255, highlightGreen / 255, highlightBlue / 255, 1f);
                     yield return new WaitForSeconds(1.0f);
                     upKey.color = new Color(defaultGray / 255, defaultGray / 255, defaultGray / 255, 1f);
                     break; 
                 case downDir:
+                    fishingSoundScript.CallDownSound();
                     downKey.color = new Color(highlightRed / 255, highlightGreen / 255, highlightBlue / 255, 1f);
                     yield return new WaitForSeconds(1.0f);
                     downKey.color = new Color(defaultGray / 255, defaultGray / 255, defaultGray / 255, 1f);
                     break;
                 case leftDir:
+                    fishingSoundScript.CallLeftSound();
                     leftKey.color = new Color(highlightRed / 255, highlightGreen / 255, highlightBlue / 255, 1f);
                     yield return new WaitForSeconds(1.0f);
                     leftKey.color = new Color(defaultGray / 255, defaultGray / 255, defaultGray / 255, 1f);
                     break;
                 default:
+                    fishingSoundScript.CallRightSound();
                     rightKey.color = new Color(highlightRed / 255, highlightGreen / 255, highlightBlue / 255, 1f);
                     yield return new WaitForSeconds(1.0f);
                     rightKey.color = new Color(defaultGray / 255, defaultGray / 255, defaultGray / 255, 1f);
@@ -252,22 +262,31 @@ public class MinigameScript : MonoBehaviour
     IEnumerator CorrectInput(int direction, bool isRoundOver)
     {
         canInput = false;
-        yield return new WaitForSeconds(1.0f);
+
         switch(direction)
         {
             case upDir:
+                fishingSoundScript.CallUpSound();
+                yield return new WaitForSeconds(1.0f);
                 upKey.color = new Color(defaultGray / 255, defaultGray / 255, defaultGray / 255, 1f);
                 break; 
             case downDir:
+                fishingSoundScript.CallDownSound();
+                yield return new WaitForSeconds(1.0f);
                 downKey.color = new Color(defaultGray / 255, defaultGray / 255, defaultGray / 255, 1f);
                 break;
             case leftDir:
+                fishingSoundScript.CallLeftSound();
+                yield return new WaitForSeconds(1.0f);
                 leftKey.color = new Color(defaultGray / 255, defaultGray / 255, defaultGray / 255, 1f);
                 break;
             default:
+                fishingSoundScript.CallRightSound();
+                yield return new WaitForSeconds(1.0f);
                 rightKey.color = new Color(defaultGray / 255, defaultGray / 255, defaultGray / 255, 1f);
                 break;
         }
+
         if(!isRoundOver)
         {
             canInput = true;
@@ -277,6 +296,7 @@ public class MinigameScript : MonoBehaviour
     IEnumerator IncorrectInput(int direction)
     {
         canInput = false;
+        fishingSoundScript.CallWrongSound();
         yield return new WaitForSeconds(1.0f);
         switch(direction)
         {
@@ -293,5 +313,13 @@ public class MinigameScript : MonoBehaviour
                 rightKey.color = new Color(defaultGray / 255, defaultGray / 255, defaultGray / 255, 1f);
                 break;
         }
+    }
+
+    IEnumerator Wait()
+    {
+        calculated = true;
+        yield return new WaitForSeconds(1.5f);
+        CalcScore();
+        
     }
 }

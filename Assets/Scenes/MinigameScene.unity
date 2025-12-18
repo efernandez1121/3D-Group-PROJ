@@ -3805,6 +3805,10 @@ PrefabInstance:
       propertyPath: action
       value: 
       objectReference: {fileID: 1762575875}
+    - target: {fileID: 2074950610450964704, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2186861736304572850, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
       propertyPath: m_Name
       value: audioSourcePlaceholder (1)
@@ -3852,8 +3856,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2186861736304572850, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 662616274}
   m_SourcePrefab: {fileID: 100100000, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
+--- !u!1 &662616273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2186861736304572850, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
+  m_PrefabInstance: {fileID: 662616272}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &662616274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662616273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba014b092d146e54f869d905731ad5ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 662616276}
+  smallWin: {fileID: 8300000, guid: a137e0548af1061448e21d7b1af47f35, type: 3}
+  bigWin: {fileID: 8300000, guid: 275d1c5de7a8bcd4490f5537e2928c6a, type: 3}
+  sadFish: {fileID: 8300000, guid: fe749adf59e04ce45b72f3322905ac05, type: 3}
+  up: {fileID: 0}
+  down: {fileID: 0}
+  left: {fileID: 0}
+  right: {fileID: 0}
+  goodJob: {fileID: 0}
+  wrong: {fileID: 0}
+--- !u!82 &662616276 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7041481416146058175, guid: 2b090ab08f6810549a7e91e5a34755a1, type: 3}
+  m_PrefabInstance: {fileID: 662616272}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &692732101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5586,6 +5625,7 @@ GameObject:
   - component: {fileID: 979872097}
   - component: {fileID: 979872096}
   - component: {fileID: 979872100}
+  - component: {fileID: 979872101}
   m_Layer: 0
   m_Name: Pond
   m_TagString: Untagged
@@ -5700,8 +5740,31 @@ MonoBehaviour:
   badFishPrefab: {fileID: 7216842218576706587, guid: b24d01a995888ae4ca1160a8d3c6e7b4, type: 3}
   goodFishPrefab: {fileID: 5810500069887991393, guid: 42cb2838262c276408f331539cce958a, type: 3}
   greatFishPrefab: {fileID: 3596938135500058094, guid: 57e871dc8e28c0b408f4cf176c4bc3af, type: 3}
+  fishingSoundScript: {fileID: 979872101}
   canInput: 0
   patternList: 
+--- !u!114 &979872101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979872095}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba014b092d146e54f869d905731ad5ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 662616276}
+  smallWin: {fileID: 8300000, guid: fe749adf59e04ce45b72f3322905ac05, type: 3}
+  bigWin: {fileID: 8300000, guid: 275d1c5de7a8bcd4490f5537e2928c6a, type: 3}
+  sadFish: {fileID: 8300000, guid: a137e0548af1061448e21d7b1af47f35, type: 3}
+  up: {fileID: 8300000, guid: d77cc5d3fc9c9654f8b492ab57af107d, type: 3}
+  down: {fileID: 8300000, guid: d05de02e630115c41bea8661704616c1, type: 3}
+  left: {fileID: 8300000, guid: 36a48511604daef47bf40e1ebfde8109, type: 3}
+  right: {fileID: 8300000, guid: 93344954fefb0454bad64b953a06e729, type: 3}
+  goodJob: {fileID: 8300000, guid: fb237b2e972edf14da9d10014ce381ae, type: 3}
+  wrong: {fileID: 8300000, guid: 36f8defc33f6cf040942c36aa0e3faaa, type: 3}
 --- !u!1001 &999914800
 PrefabInstance:
   m_ObjectHideFlags: 0
