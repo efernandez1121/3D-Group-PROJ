@@ -25,7 +25,7 @@ The maze will have 4 main rooms:
 3. Stamina replenish room - will have a typing minigame presented as a pond. Upon victory, the player will receive a fish that restores their stamina by a fixed amount if won. If they lose, they'll get bones that reduces their stamina more
 4. Initial room - this is where the player spawns
 
-### General goals for each person (such as art/animation/level design)
+### Contributions from each person 
 Talia Goody
 * Fish minigame - Stamina replenish game: 
     * game logic
@@ -64,10 +64,10 @@ Alisa Sriphet
     * Connects stamina rewards/penalties
 * Obstacles: 
     * Implements thwump motion, collision, and stamina reduction logic
-    * animation
+    * animation/movement
     * sound effects
 * Fishing minigame:
-    * Created Persistent data storage for saving state
+    * Created Persistent data storage for saving state allowing for reload
 * Player:
     * Created Player knockback system during collisions
 * Menu Navigation:
