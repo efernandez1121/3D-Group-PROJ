@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStamina: 100
   minStamina: 0
-  runCost: 1
+  walkCost: 1
+  runCost: 3
   pushPullCost: 2
   thwumpDmg: 10
   badFish: 5

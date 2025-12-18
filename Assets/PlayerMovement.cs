@@ -82,7 +82,10 @@ public class SimplePlayerMovement : MonoBehaviour
 
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
         bool isMoving = (inputV != 0 || inputH != 0);
-        detector.isRunning = isMoving; //for stamina
+
+        //for stamina
+        detector.isWalking = isMoving; 
+        detector.isRunning = isRunning && isMoving;
 
         float targetSpeed = isRunning ? runSpeed : walkSpeed;
 

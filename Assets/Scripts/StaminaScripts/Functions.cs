@@ -14,7 +14,7 @@ public class Functions : MonoBehaviour
     public ActionDetector action; //add GameObject
 
     public float currStamina;
-    public float delay = 0.5f;
+    public float delay = 0.45f;
 
     private void Start()
     {
@@ -29,13 +29,13 @@ public class Functions : MonoBehaviour
         float restore = 0f; //current amount to restore
 
         //gets the correct drain amount
-        cost = manager.getDrainAmt(action.isRunning, action.isPP, action.isHit, action.gotBadFish);
+        cost = manager.getDrainAmt(action.isWalking, action.isRunning, action.isPP, action.isHit, action.gotBadFish);
 
         //get the correct restore amount
         restore = manager.getRestoreAmt(action.smallRestore, action.bigRestore);
 
         //apply it smoothly for smooth actions
-        if (action.isRunning || action.isPP)
+        if (action.isWalking || action.isPP || action.isRunning)
         {
             currStamina -= cost * Time.deltaTime;
         }

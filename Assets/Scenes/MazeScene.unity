@@ -1813,6 +1813,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5762463009485590720, guid: 5fa23f120128be34d823c37cfc58a618, type: 3}
+      propertyPath: delay
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762463009485590720, guid: 5fa23f120128be34d823c37cfc58a618, type: 3}
       propertyPath: action
       value: 
       objectReference: {fileID: 471387687}
