@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PersistentPlayerData : MonoBehaviour
 {
+    public ManagerStamina manager;
+
     public static PersistentPlayerData Instance;
 
     //the last spot the player was in 
     public Vector3 savedPlayerPosition;
+    public float savedStamina;
+
     //public bool hasPosition = false; //for detecting position ex
 
     // using Awake for initiliazation
@@ -24,8 +28,9 @@ public class PersistentPlayerData : MonoBehaviour
 
         // INITIAL DEFAULT POSITION
         savedPlayerPosition = new Vector3(0f, 0.5f, 0f);
-        //hasPosition = false;  // false until explicitly saved
 
+        //INITIAL DEFAULT STAMINA
+        savedStamina = manager.maxStamina;
     }
 
     // Update is called once per frame

@@ -9,6 +9,7 @@ public class PondScript : MonoBehaviour
     [Header("References")]
     public PersistentPlayerData playerData;
     public SimplePlayerMovement player;
+    public Functions staminaData;
 
     public GameObject text;
     public Image fadeImage;
@@ -43,7 +44,7 @@ public class PondScript : MonoBehaviour
     {
         float timer = 0f;
         
-        //Let canvas image fade out over 1.5 seconds as a transition
+        //Let canvas image fade out over 1 seconds as a transition
         while (timer < fadeDuration)
         {
             timer += Time.deltaTime;
@@ -51,9 +52,11 @@ public class PondScript : MonoBehaviour
             fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, alpha);
             yield return null;
         }
-        //save player position
+        //save player data
         playerData.savedPlayerPosition = player.CurrPosition();
+        playerData.savedStamina = staminaData.currStamina;
         Debug.Log($"Current positin is{playerData.savedPlayerPosition}");
+        Debug.Log($"Current stamina is{playerData.savedStamina}");
 
         //Load scene for fishing minigame
         SceneManager.LoadScene("MinigameScene");

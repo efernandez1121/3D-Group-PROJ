@@ -1922,6 +1922,10 @@ PrefabInstance:
       propertyPath: action
       value: 
       objectReference: {fileID: 471387687}
+    - target: {fileID: 5762463009485590720, guid: 5fa23f120128be34d823c37cfc58a618, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 1276736257}
     - target: {fileID: 6963351943657416659, guid: 5fa23f120128be34d823c37cfc58a618, type: 3}
       propertyPath: m_Name
       value: StaminaFunctionsHolder
@@ -5298,6 +5302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 1276736257}
   player: {fileID: 2025839631}
+  staminaData: {fileID: 1605627355}
   text: {fileID: 264073926}
   fadeImage: {fileID: 1557311290}
 --- !u!65 &466798329
@@ -13417,7 +13422,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff49c38fffa9f664790863c87d7bbbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 11400000, guid: ab744e91b31ff124d81b761b57ed55c4, type: 2}
   savedPlayerPosition: {x: 0, y: 0, z: 0}
+  savedStamina: 0
 --- !u!4 &1276736258
 Transform:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class Functions : MonoBehaviour
     //reference to initial stats
     public ManagerStamina manager;
     public ActionDetector action; //add GameObject
+    public PersistentPlayerData playerData;
 
     public float currStamina;
     public float delay = 0.45f;
@@ -19,7 +20,7 @@ public class Functions : MonoBehaviour
     private void Start()
     {
         //initialize the current stamina to the maximum amount
-        currStamina = manager.maxStamina;
+        currStamina = playerData.savedStamina;
     }
 
     // Update is called once per frame
@@ -53,12 +54,20 @@ public class Functions : MonoBehaviour
         //check for stamina restore
         if (action.wonMiniGame)
         {
+            Debug.Log($"small victory{action.smallRestore}");
+            Debug.Log($"big victory{action.bigRestore}");
+            Debug.Log($"Pre restore stamina {currStamina}");
             currStamina += restore;
+            Debug.Log($"post restore stamina {currStamina}");
+
 
             //reset flags
             action.wonMiniGame = false;
             action.smallRestore = false;
             action.bigRestore = false;
+            Debug.Log("reset check:");
+            Debug.Log($"small victory{action.smallRestore}");
+            Debug.Log($"big victory{action.bigRestore}");
         }
 
         //check for if out of stamina

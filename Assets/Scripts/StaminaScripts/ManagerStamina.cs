@@ -8,7 +8,7 @@ using UnityEngine;
 public class ManagerStamina : ScriptableObject
 {
     [Header("Core amts")]
-    public float maxStamina = 20f;
+    public float maxStamina = 80f;
     public float minStamina = 0f;
 
     [Header("Action Costs")]
