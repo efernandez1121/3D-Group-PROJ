@@ -62,7 +62,12 @@ public class SimplePlayerMovement : MonoBehaviour
     {
         if (PersistentPlayerData.Instance != null)
         {
-            transform.position = PersistentPlayerData.Instance.savedPlayerPosition; //sets the player to the saved position
+            controller = GetComponent<CharacterController>();
+
+            controller.enabled = false; // prevent CC from fighting the teleport
+            transform.position = PersistentPlayerData.Instance.savedPlayerPosition;
+            controller.enabled = true;
+
             Debug.Log($"Spawning at {transform.position}");
         }
     }
