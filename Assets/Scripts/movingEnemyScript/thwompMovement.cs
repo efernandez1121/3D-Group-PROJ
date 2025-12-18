@@ -45,12 +45,23 @@ public class thwompMovement : MonoBehaviour
     [Header("Trackers")]
     public float currSpeed = 10f; //same as speed, but it'll be changed later
     public float xStart;
+    public float yStart;
     public float lastHitSound = -999f; //set it so that it def won't trigger immediately
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>(); // makees the thwump the audio source
         xStart = transform.position.x; //get the marker of current x position
+        yStart = transform.position.y; // the initial y position
+
+        if (yStart <= topHeight / 2) //go down first
+        {
+            movingUp = false;
+        }
+        else
+        {
+            movingUp = true;
+        }
     }
 
     // Update is called once per frame
