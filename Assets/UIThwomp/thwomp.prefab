@@ -396,8 +396,8 @@ Transform:
   m_GameObject: {fileID: 7492588964856184730}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 7, z: 11}
-  m_LocalScale: {x: 15, y: 15, z: 12}
+  m_LocalPosition: {x: -0.5661118, y: 0.6932001, z: 15.893338}
+  m_LocalScale: {x: 15, y: 15, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3384186788793974178}
@@ -421,10 +421,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 0}
+  player: {fileID: 0}
   hitAudio: {fileID: 8300000, guid: eb4c309640584b04996cfd03e3c370ff, type: 3}
   volume: 8
   topHeight: 7
-  bottomHeight: 0
+  bottomHeight: 0.5
   leftAndRightEdge: 0.35
   speed: 10
   maxSpeed: 20

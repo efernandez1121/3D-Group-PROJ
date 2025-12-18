@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf82c2d4aaa3f240acda90dfac58a4a, type: 3}
   m_Name: catStaminaManager
   m_EditorClassIdentifier: 
-  maxStamina: 100
+  maxStamina: 80
   minStamina: 0
-  runCost: 1
+  walkCost: 1
+  runCost: 3
   pushPullCost: 2
   thwumpDmg: 10
   badFish: 5

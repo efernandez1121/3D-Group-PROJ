@@ -33,12 +33,12 @@ public class staminaSound : MonoBehaviour
     {
         action.isHit = Input.GetKeyDown("h");
         action.isPP = Input.GetKey("e");
-        action.isRunning = Input.GetKey("w") || Input.GetKey("a") ||
+        action.isWalking = Input.GetKey("w") || Input.GetKey("a") ||
                             Input.GetKey("s") || Input.GetKey("d");
 
-        action.gotBadFish = Input.GetKeyDown("b");
-        action.smallRestore = Input.GetKeyDown("f");
-        action.bigRestore = Input.GetKeyDown("g");
+        PersistentPlayerData.Instance.gotBadFish = Input.GetKeyDown("b");
+        PersistentPlayerData.Instance.smallRestore = Input.GetKeyDown("f");
+        PersistentPlayerData.Instance.bigRestore = Input.GetKeyDown("g");
 
         if (action.isHit)
         {
@@ -51,28 +51,28 @@ public class staminaSound : MonoBehaviour
             Debug.Log("pushing/pulling");
         }
 
-        if (action.isRunning)
+        if (action.isWalking)
         {
             Debug.Log("running somewhere");
         }
 
-        if (action.gotBadFish)
+        if (PersistentPlayerData.Instance.gotBadFish)
         {
             PlaySound(sadFish);
             Debug.Log("got bad fish");
         }
 
-        if (action.smallRestore)
+        if (PersistentPlayerData.Instance.smallRestore)
         {
-            action.wonMiniGame = true;
+            PersistentPlayerData.Instance.wonMiniGame = true;
             PlaySound(smallWin);
             Debug.Log("small restore");
         }
 
-        if (action.bigRestore)
+        if (PersistentPlayerData.Instance.bigRestore)
         {
             PlaySound(bigWin);
-            action.wonMiniGame = true;
+            PersistentPlayerData.Instance.wonMiniGame = true;
             Debug.Log("big restore");
         }
     }

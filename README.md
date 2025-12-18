@@ -17,20 +17,19 @@ https://youtu.be/jZTyv9U5xlM
 
 ### Description of current target for the game - final target :
 
-It will an avatar based game where the player plays as a cat while the camera watches slightly behind it in a 3rd person view. The player will navigate through a map in order to collect 2 keys. After collecting both, they will be able to open a chest hidden in the maze and get their yarn (Victory situation). As the cat moves, it will use up stamina which can only be refilled through completion of a typing minigame also located in the maze. 
+It will an avatar based game where the player plays as a cat while the camera watches slightly behind it in a 3rd person view. The player will navigate through a maze to find a chest hidden in the maze (Victory situation). As the cat moves, it will use up stamina which can only be refilled through completion of a simon-says minigame also located in the maze. 
 
 The maze will have 4 main rooms:
 1. Goal room - the room with the yarn chest
 2. Sliding puzzle room - with have a puzzle 
 3. Stamina replenish room - will have a typing minigame presented as a pond. Upon victory, the player will receive a fish that restores their stamina by a fixed amount if won. If they lose, they'll get bones that reduces their stamina more
-4. Initial room - this is where the player spawns. It will have a tiny version of the stamina mini game, and an item for the player to slide
+4. Initial room - this is where the player spawns
 
-### General goals for each person (such as art/animation/level design)
+### Contributions from each person 
 Talia Goody
-* Typing/fish minigame - Stamina replenish game: 
+* Fish minigame - Stamina replenish game: 
     * game logic
     * fish spawning
-    * Connects stamina rewards/penalties
 * Level Design:
     * design maze and construct path layout
     * start and end points 
@@ -49,7 +48,6 @@ Estephanie Fernandez
 * Puzzle Design - what you'll be doing
     * Designs and implements sliding box mechanics to challenge player
     * game logic
-    * add other puzzles if time allows
 
 Nuonnettra Kanzaki
 * Menu Design: 
@@ -63,7 +61,14 @@ Alisa Sriphet
     * stamina bar UI
     * logic for regeneration and degeneration
     * stamina adjustments to movement
+    * Connects stamina rewards/penalties
 * Obstacles: 
     * Implements thwump motion, collision, and stamina reduction logic
-    * animation
+    * animation/movement
     * sound effects
+* Fishing minigame:
+    * Created Persistent data storage for saving state allowing for reload
+* Player:
+    * Created Player knockback system during collisions
+* Menu Navigation:
+    * Connected 0 stamina to end of game menu
