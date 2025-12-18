@@ -23,7 +23,7 @@ public class PersistentPlayerData : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // INITIAL DEFAULT POSITION
-        savedPlayerPosition = new Vector3(0f, 0f, 0f);
+        savedPlayerPosition = new Vector3(0f, 0.5f, 0f);
         //hasPosition = false;  // false until explicitly saved
 
     }
