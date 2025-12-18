@@ -41,6 +41,7 @@ public class SimplePlayerMovement : MonoBehaviour
     {
         if (PersistentPlayerData.Instance != null) {
             transform.position = PersistentPlayerData.Instance.savedPlayerPosition; //sets the player to the saved position
+            Debug.Log($"Spawning at {transform.position}");
         }    
 
         controller = GetComponent<CharacterController>();
