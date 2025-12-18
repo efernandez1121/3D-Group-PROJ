@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class SimplePlayerMovement : MonoBehaviour
 {
 
     // imports
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     // High-jump state
     private bool isChargingJump = false;
     private float jumpChargeTimer = 0f;
-    
+
     // Animator
     private Animator anim;
 
@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         bool isMoving = (inputV != 0 || inputH != 0);
 
         //for stamina
-        detector.isWalking = isMoving; 
+        detector.isWalking = isMoving;
         detector.isRunning = isRunning && isMoving;
 
         float targetSpeed = isRunning ? runSpeed : walkSpeed;
@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         // Horizontal move
         moveDirection = (forward * inputV + right * inputH).normalized * targetSpeed;
 
-        
+
         // ---------- HIGH JUMP LOGIC ----------
         if (controller.isGrounded)
         {
@@ -162,7 +162,8 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Running", isRunning);
         }
         // ---------- KNOCKBACK FADE OUT ----------
-        if (knockBackSpeed.sqrMagnitude > 0.001f) {
+        if (knockBackSpeed.sqrMagnitude > 0.001f)
+        {
             knockBackSpeed = Vector3.Lerp(knockBackSpeed, Vector3.zero, endknockBack * Time.deltaTime);
         }
     }
@@ -194,17 +195,5 @@ public class PlayerMovement : MonoBehaviour
 
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
         transform.rotation *= Quaternion.Euler(0f, Input.GetAxis("Mouse X") * lookSpeed, 0f);
-    }
-
-    public void SettingStatus()
-    {
-        if(this.gameObject.active == true)
-        {
-            this.gameObject.SetActive(false);
-        }
-        else
-        {
-            this.gameObject.SetActive(true);
-        }
     }
 }
