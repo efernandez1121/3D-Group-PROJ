@@ -146,7 +146,6 @@ public class MinigameScript : MonoBehaviour
                 canInput = false;
                 StartCoroutine(StartMinigame(successfulAttempt));
             }
-            
         }
     }
 

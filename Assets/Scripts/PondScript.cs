@@ -49,6 +49,6 @@ public class PondScript : MonoBehaviour
         }
 
         //Load scene for fishing minigame
-        SceneManager.LoadScene("FishingScene");
+        SceneManager.LoadScene("MinigameScene");
     }
 }

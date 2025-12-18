@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class SimplePlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     public Camera playerCamera;
@@ -27,7 +27,7 @@ public class SimplePlayerMovement : MonoBehaviour
     // High-jump state
     private bool isChargingJump = false;
     private float jumpChargeTimer = 0f;
-
+    
     // Animator
     private Animator anim;
 
@@ -146,5 +146,17 @@ public class SimplePlayerMovement : MonoBehaviour
 
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
         transform.rotation *= Quaternion.Euler(0f, Input.GetAxis("Mouse X") * lookSpeed, 0f);
+    }
+
+    public void SettingStatus()
+    {
+        if(this.gameObject.active == true)
+        {
+            this.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.gameObject.SetActive(true);
+        }
     }
 }
