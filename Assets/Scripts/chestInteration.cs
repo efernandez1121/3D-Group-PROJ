@@ -23,7 +23,6 @@ public class chestInteration : MonoBehaviour
     {
         if (seesPlayer && Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("Playing sound");
             audioSource.PlayOneShot(winAudio, volume);
             StartCoroutine(WinCase());
         }
