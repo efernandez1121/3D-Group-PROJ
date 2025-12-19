@@ -1,10 +1,10 @@
-# Cat Adventure! ~o( =∩ω∩= )m
+# Luna's Labyrinth! ~o( =∩ω∩= )m
 
 Welcome to our cozy, dungeon adventure game!
 
 ## Halfway project review:
 
-### Name of game: Cat Adventure
+### Name of game: Luna's Labyrinth
 
 ### Names of group members: 
 * Talia Goody
@@ -12,7 +12,7 @@ Welcome to our cozy, dungeon adventure game!
 * Nuonnettra Kanzaki
 * Alisa Sriphet
 
-### Current build progress:
+### Midway build progress:
 https://youtu.be/jZTyv9U5xlM
 
 ### Description of current target for the game - final target :
@@ -27,14 +27,17 @@ The maze will have 4 main rooms:
 
 ### Contributions from each person 
 Talia Goody
-* Fish minigame - Stamina replenish game: 
-    * game logic
+* Fish minigame - Stamina replenish game:
+    * interacting with the pond to start the minigame
+    * Simon says
     * fish spawning
+    * sound design in fishing minigame
 * Level Design:
     * design maze and construct path layout
     * start and end points 
-    * thwumps (enemies - the same as the ones in mario) 
     * fish ponds (stamina minigame)
+* Chest
+    * contributed to the functionality of interacting with the chest
 
 Estephanie Fernandez
 * Player control:
@@ -43,18 +46,22 @@ Estephanie Fernandez
     * sound
     * implements cat movement 
         * push 
-        * pull
+        * jump
         * run (wasd directions)
-* Puzzle Design - what you'll be doing
+* Puzzle Design 
     * Designs and implements sliding box mechanics to challenge player
-    * game logic
+    * 3 sliding blocks given to solve the puzzle, but only 2 are needed.
+    * Assembled castle layout and obstacles
+* Prop placement:
+    * searched for assets
+    * incorportated both given and found assets to place into mazescene
 
 Nuonnettra Kanzaki
 * Menu Design: 
     * Builds Start and Pause Menu
     * Connect menu options to scene
-* Prop placement - what you'll be doing:
-    * visuals of the game
+* Picking and choosing assets - what you'll be doing:
+    * looked for assets 
 
 Alisa Sriphet
 * Stamina System:
@@ -72,3 +79,6 @@ Alisa Sriphet
     * Created Player knockback system during collisions
 * Menu Navigation:
     * Connected 0 stamina to end of game menu
+    * Connected chest interaction with the end menu
+* Chest
+    * contributed to the functionality of interacting with the chest
