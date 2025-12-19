@@ -2,7 +2,7 @@
 
 Welcome to our cozy, dungeon adventure game!
 
-## Halfway project review:
+## Project review:
 
 ### Name of game: Luna's Labyrinth
 
@@ -15,7 +15,7 @@ Welcome to our cozy, dungeon adventure game!
 ### Midway build progress:
 https://youtu.be/jZTyv9U5xlM
 
-### Description of current target for the game - final target :
+### Description of current target for the game/final target :
 
 It will an avatar based game where the player plays as a cat while the camera watches slightly behind it in a 3rd person view. The player will navigate through a maze to find a chest hidden in the maze (Victory situation). As the cat moves, it will use up stamina which can only be refilled through completion of a simon-says minigame also located in the maze. 
 
