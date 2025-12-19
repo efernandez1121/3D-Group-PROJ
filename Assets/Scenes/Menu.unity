@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -778,7 +778,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cat's Adventure
+  m_text: Luna's Labyrinth
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3db7b508415d748b891482a3243dc2d0, type: 2}
   m_sharedMaterial: {fileID: -4132248894093493239, guid: 3db7b508415d748b891482a3243dc2d0, type: 2}
