@@ -1,10 +1,10 @@
-# Cat Adventure! ~o( =∩ω∩= )m
+# Luna's labyrinth! ~o( =∩ω∩= )m
 
 Welcome to our cozy, dungeon adventure game!
 
 ## Halfway project review:
 
-### Name of game: Cat Adventure
+### Name of game: labyrinth
 
 ### Names of group members: 
 * Talia Goody
@@ -35,6 +35,8 @@ Talia Goody
     * start and end points 
     * thwumps (enemies - the same as the ones in mario) 
     * fish ponds (stamina minigame)
+* Chest
+    * contributed to the functionality of interacting with the chest
 
 Estephanie Fernandez
 * Player control:
@@ -72,3 +74,6 @@ Alisa Sriphet
     * Created Player knockback system during collisions
 * Menu Navigation:
     * Connected 0 stamina to end of game menu
+    * Connected chest interaction with the end menu
+* Chest
+    * contributed to the functionality of interacting with the chest
