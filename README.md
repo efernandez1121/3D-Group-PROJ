@@ -57,11 +57,16 @@ Estephanie Fernandez
     * incorportated both given and found assets to place into mazescene
 
 Nuonnettra Kanzaki
-* Menu Design: 
-    * Builds Start and Pause Menu
-    * Connect menu options to scene
-* Picking and choosing assets - what you'll be doing:
-    * looked for assets 
+* Menu System & Navigation:
+   * Designed and implemented the Main Menu, Guide page, and Game Over menu
+   * Connected menu buttons to scene transitions using SceneManager
+   * Configured Unity Build Settings to ensure correct scene loading order
+   * Tested and verified Game Over menu returning to Main Menu
+* Assets & Visual Setup:
+   * Sourced, imported, and organized environmental assets for the game
+   * Imported assets using Git LFS to prevent repository and file size issues
+   * Implemented lighting for assets to improve visual clarity and atmosphere
+   * Developed lighting and asset setup in a separate scene to avoid asset conflicts
 
 Alisa Sriphet
 * Stamina System:
