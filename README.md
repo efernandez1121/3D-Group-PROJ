@@ -46,18 +46,22 @@ Estephanie Fernandez
     * sound
     * implements cat movement 
         * push 
-        * pull
+        * jump
         * run (wasd directions)
-* Puzzle Design - what you'll be doing
+* Puzzle Design 
     * Designs and implements sliding box mechanics to challenge player
-    * game logic
+    * 3 sliding blocks given to solve the puzzle, but only 2 are needed.
+    * Assembled castle layout and obstacles
+* Prop placement:
+    * searched for assets
+    * incorportated both given and found assets to place into mazescene
 
 Nuonnettra Kanzaki
 * Menu Design: 
     * Builds Start and Pause Menu
     * Connect menu options to scene
-* Prop placement - what you'll be doing:
-    * visuals of the game
+* Picking and choosing assets - what you'll be doing:
+    * looked for assets 
 
 Alisa Sriphet
 * Stamina System:
