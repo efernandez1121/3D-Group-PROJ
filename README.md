@@ -1,10 +1,10 @@
-# Luna's labyrinth! ~o( =∩ω∩= )m
+# Luna's Labyrinth! ~o( =∩ω∩= )m
 
 Welcome to our cozy, dungeon adventure game!
 
 ## Halfway project review:
 
-### Name of game: labyrinth
+### Name of game: Luna's Labyrinth
 
 ### Names of group members: 
 * Talia Goody
@@ -12,7 +12,7 @@ Welcome to our cozy, dungeon adventure game!
 * Nuonnettra Kanzaki
 * Alisa Sriphet
 
-### Current build progress:
+### Midway build progress:
 https://youtu.be/jZTyv9U5xlM
 
 ### Description of current target for the game - final target :
@@ -27,13 +27,14 @@ The maze will have 4 main rooms:
 
 ### Contributions from each person 
 Talia Goody
-* Fish minigame - Stamina replenish game: 
-    * game logic
+* Fish minigame - Stamina replenish game:
+    * interacting with the pond to start the minigame
+    * Simon says
     * fish spawning
+    * sound design in fishing minigame
 * Level Design:
     * design maze and construct path layout
     * start and end points 
-    * thwumps (enemies - the same as the ones in mario) 
     * fish ponds (stamina minigame)
 * Chest
     * contributed to the functionality of interacting with the chest
