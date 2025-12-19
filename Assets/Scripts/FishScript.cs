@@ -15,7 +15,8 @@ public class FishScript : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
+    {   
+        //Slowly move prefab upwards until it reaches a certain height
         if(transform.position.y <= maxHeight)
         {
             float movement = transform.position.y + speed;
