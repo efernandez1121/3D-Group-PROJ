@@ -12,7 +12,7 @@ public class chestInteration : MonoBehaviour
 
     public GameObject text;
     private bool seesPlayer = false;
-    private float endDelay = 2f;
+    private float endDelay = 2.5f;
     // Update is called once per frame
 
     private void Start()
