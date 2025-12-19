@@ -18,6 +18,6 @@ MonoBehaviour:
   runCost: 3
   pushPullCost: 2
   thwumpDmg: 10
-  badFish: 5
-  smallFish: 5
-  bigFish: 15
+  badFish: 10
+  smallFish: 20
+  bigFish: 40
